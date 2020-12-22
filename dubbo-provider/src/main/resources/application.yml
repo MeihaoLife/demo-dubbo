@@ -1,0 +1,15 @@
+server:
+  port: 9081
+
+# dubbo相关配置
+dubbo:
+  application:
+    name: demo-provider
+  registry:
+    address: zookeeper://127.0.0.1:2181
+  protocol:
+    name: dubbo
+    port: 20080
+  scan:
+    base-packages: com.study.dubbo.provider.service
+
