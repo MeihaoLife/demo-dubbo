@@ -3,12 +3,8 @@ package com.study.demo.dubbo.consumer.controller;
 import com.study.dubbo.api.dto.UserDTO;
 import com.study.dubbo.api.service.UserService;
 import org.apache.dubbo.config.annotation.DubboReference;
-import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.annotation.Resource;
-
 /**
  * @ClassName: UserController
  * @Description: TODO

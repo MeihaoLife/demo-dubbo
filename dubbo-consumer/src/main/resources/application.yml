@@ -7,3 +7,48 @@ dubbo:
     address: zookeeper://127.0.0.1:2181
   scan:
     base-packages: com.study.demo.dubbo.consumer.controller
+#
+#sharding:
+#  jdbc:
+#    datasource:
+#      names: db1,db2,db3 # 数据源
+#      db1:
+#        type: com.zaxxer.hikari.HikariDataSource
+#        driver-class-name: com.mysql.cj.jdbc.Driver
+#        jdbc-url: jdbc:mysql://localhost:3306/db1?characterEncoding=utf-8&&serverTimezone=GMT%2B8
+#        username: root
+#        password: 123456
+#      db2:
+#        type: com.zaxxer.hikari.HikariDataSource
+#        driver-class-name: com.mysql.cj.jdbc.Driver
+#        jdbc-url: jdbc:mysql://localhost:3306/db2?characterEncoding=utf-8&&serverTimezone=GMT%2B8
+#        username: root
+#        password: 123456
+#      db3:
+#        type: com.zaxxer.hikari.HikariDataSource
+#        driver-class-name: com.mysql.cj.jdbc.Driver
+#        jdbc-url: jdbc:mysql://localhost:3306/db3?characterEncoding=utf-8&&serverTimezone=GMT%2B8
+#        username: root
+#        password: 123456
+#    config:
+#      sharding:
+#        default-database-strategy:
+#          inline:
+#            sharding-column: user_id
+#            algorithm-expression: db$->{user_id%3+1}
+#        tables:
+#          t_user_operate_log:
+#            actual-data-nodes: db$->{1..3}.t_user_operate_log_$->{0..1}
+#            table-strategy:
+#              inline:
+#                sharding-column: user_id
+#                algorithm-expression: t_user_operate_log_$->{user_id%2}
+#      props:
+#        sql:
+#          show: true
+#spring:
+#  main:
+#    allow-bean-definition-overriding: true
+#mybatis-plus:
+#  configuration:
+#    map-underscore-to-camel-case: true

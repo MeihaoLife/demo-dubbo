@@ -12,4 +12,75 @@ dubbo:
     port: 20080
   scan:
     base-packages: com.study.dubbo.provider.service
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  shardingsphere: # shardingsphere 分库分表 读写分离配置
+    datasource: # 数据源配置
+      names: m-db1,m-db2,m-db3,s-db1,s-db2,s-db3
+      m-db1:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://localhost:3306/db1?characterEncoding=utf-8&&serverTimezone=GMT%2B8
+        username: root
+        password: 123456
+      m-db2:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://localhost:3306/db2?characterEncoding=utf-8&&serverTimezone=GMT%2B8
+        username: root
+        password: 123456
+      m-db3:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://localhost:3306/db3?characterEncoding=utf-8&&serverTimezone=GMT%2B8
+        username: root
+        password: 123456
+      s-db1:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://localhost:3307/db1?characterEncoding=utf-8&&serverTimezone=GMT%2B8
+        username: root
+        password: 123456
+      s-db2:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://localhost:3307/db2?characterEncoding=utf-8&&serverTimezone=GMT%2B8
+        username: root
+        password: 123456
+      s-db3:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://localhost:3307/db3?characterEncoding=utf-8&&serverTimezone=GMT%2B8
+        username: root
+        password: 123456
 
+    sharding:
+      default-database-strategy: # 分库
+        inline:
+          sharding-column: user_id
+          algorithm-expression: m-db$->{user_id%3+1}
+      tables: # 分表
+        t_user_operate_log:
+          actual-data-nodes: m-db$->{1..3}.t_user_operate_log_$->{0..1}
+          table-strategy:
+            inline:
+              sharding-column: user_id
+              algorithm-expression: t_user_operate_log_$->{user_id%2}
+      master-slave-rules: #主从配置，读写分离配置，读走从库（从库可以配置多个），写主库
+        m-db1:
+          master-data-source-name: m-db1
+          slave-data-source-names: s-db1
+        m-db2:
+          master-data-source-name: m-db2
+          slave-data-source-names: s-db2
+        m-db3:
+          master-data-source-name: m-db3
+          slave-data-source-names: s-db3
+    props: # 打印sql
+      sql:
+        show: true
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true # 下划线转驼峰
