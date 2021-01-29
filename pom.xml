@@ -8,6 +8,7 @@
         <module>dubbo-provider</module>
         <module>dubbo-api</module>
         <module>dubbo-consumer</module>
+        <module>dubbo-tx-lcn-tm</module>
     </modules>
     <properties>
         <dubbo.version>2.7.8</dubbo.version>

@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: txlcn-tm
+  datasource:
+    hikari:
+      username: root
+      password: 123456
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://127.0.0.1:3306/scm_transaction?characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    hibernate:
+      ddl-auto: create
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: 123456
+
+tx-lcn:
+  manager:
+    admin-key: 123456
+    host: 127.0.0.1
+    port: 8070
+  logger:
+    enabled: true
+    driver-class-name: ${spring.datasource.hikari.driver-class-name}
+    jdbc-url: ${spring.datasource.hikari.jdbc-url}
+    username: ${spring.datasource.hikari.username}
+    password: ${spring.datasource.hikari.password}
+logging:
+  level:
+    com:
+      codingapi:
+        txlcn: DEBUG
+server:
+  port: 7970

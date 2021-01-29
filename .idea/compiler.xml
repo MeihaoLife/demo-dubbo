@@ -6,9 +6,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="dubbo-provider" />
-        <module name="dubbo-consumer" />
         <module name="dubbo-api" />
+        <module name="dubbo-tx-lcn-tm" />
+        <module name="dubbo-consumer" />
+        <module name="dubbo-provider" />
       </profile>
     </annotationProcessing>
   </component>
@@ -18,6 +19,7 @@
       <module name="dubbo-api" options="-parameters" />
       <module name="dubbo-consumer" options="-parameters" />
       <module name="dubbo-provider" options="-parameters" />
+      <module name="dubbo-tx-lcn-tm" options="-parameters" />
     </option>
   </component>
 </project>

@@ -15,5 +15,7 @@ public interface UserOperateLogService {
 
     boolean save(UserOperateLogDTO entity);
 
+    boolean lcnSave(UserOperateLogDTO entity);
+
     List<UserOperateLogDTO> getList(UserOperateLogDTO userOperateLogModel);
 }

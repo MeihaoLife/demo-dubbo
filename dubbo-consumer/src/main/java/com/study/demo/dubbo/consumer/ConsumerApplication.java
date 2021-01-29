@@ -1,7 +1,9 @@
 package com.study.demo.dubbo.consumer;
 
+import com.codingapi.txlcn.tc.config.EnableDistributedTransaction;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * @ClassName: ConsumerApplication
@@ -11,6 +13,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @Version: v1.0
  **/
 @SpringBootApplication
+@EnableDistributedTransaction
+@EnableTransactionManagement
 public class ConsumerApplication {
 
     public static void main(String[] args) {

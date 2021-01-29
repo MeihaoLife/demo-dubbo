@@ -3,12 +3,16 @@ package com.study.dubbo.provider.service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.codingapi.txlcn.tc.annotation.DTXPropagation;
+import com.codingapi.txlcn.tc.annotation.LcnTransaction;
+import com.codingapi.txlcn.tracing.TracingContext;
 import com.study.dubbo.api.dto.UserOperateLogDTO;
 import com.study.dubbo.api.service.UserOperateLogService;
 import com.study.dubbo.provider.mapper.UserOperateLogMapper;
 import com.study.dubbo.provider.model.UserOperateLogModel;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.BeanUtils;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,6 +30,18 @@ public class UserOperateLogServiceImpl extends ServiceImpl<UserOperateLogMapper,
 
     @Override
     public boolean save(UserOperateLogDTO userOperateLogDTO) {
+        UserOperateLogModel model = new UserOperateLogModel();
+        BeanUtils.copyProperties(userOperateLogDTO, model);
+        return super.save(model);
+    }
+
+    @Override
+    @Transactional
+    @LcnTransaction(propagation = DTXPropagation.SUPPORTS)
+    public boolean lcnSave(UserOperateLogDTO userOperateLogDTO) {
+
+        String groupId = TracingContext.tracing().groupId();
+        System.out.println("consumer groupId = " + groupId);
         UserOperateLogModel model = new UserOperateLogModel();
         BeanUtils.copyProperties(userOperateLogDTO, model);
         return super.save(model);

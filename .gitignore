@@ -2,3 +2,4 @@
 /dubbo-api/target/
 /dubbo-consumer/target/
 /dubbo-provider/target/
+/dubbo-tx-lcn-tm/target/
